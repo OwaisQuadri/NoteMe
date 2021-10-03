@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //newnote onclick
-    public void newNote(View view){
+    public void newNote(){
         Intent i = new Intent(MainActivity.this, NewNote.class);
         startActivity(i);
     }
@@ -32,5 +32,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.add_note:
+                newNote();
+                return true;
+            case R.id.search_bar:
+                //do something
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
