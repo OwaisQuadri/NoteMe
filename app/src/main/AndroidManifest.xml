@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteMe">
         <activity
+            android:name=".NewNote"
+            android:exported="true"
+            android:label="@string/newnote_label"
+            />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
