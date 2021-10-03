@@ -3,6 +3,9 @@ package com.example.noteme;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +13,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchbar, menu);
+        MenuItem menuItem1 = menu.findItem(R.id.search_bar);
+
+        getMenuInflater().inflate(R.menu.addnote, menu);
+        MenuItem menuItem = menu.findItem(R.id.add_note);
+        return super.onCreateOptionsMenu(menu);
     }
 }
