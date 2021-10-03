@@ -2,6 +2,7 @@ package com.example.noteme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    //newnote onclick
+    public void newNote(View view){
+        Intent i = new Intent(MainActivity.this, NewNote.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.searchbar, menu);
@@ -23,5 +30,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.addnote, menu);
         MenuItem menuItem = menu.findItem(R.id.add_note);
         return super.onCreateOptionsMenu(menu);
+
+
     }
 }

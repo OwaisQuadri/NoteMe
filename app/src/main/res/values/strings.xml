@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NoteMe</string>
+    <!--labels-->
+    <string name="newnote_label">New Note</string>
+    <!--hints-->
+    <string name="title_hint">Title</string>
+    <string name="subtitle_hint">Subtitle</string>
+    <string name="body_hint">Body</string>
+    <!--buttons-->
+    <string name="newNoteButton">New Note</string>
+    <string name="backButton">Back</string>
+    <string name="doneButton">Done</string>
 </resources>
