@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.searchbar, menu);
         MenuItem menuItem1 = menu.findItem(R.id.search_bar);
+        android.widget.SearchView searchView = (android.widget.SearchView) menuItem1.getActionView();
+        searchView.setQueryHint("Search Bar");
 
         getMenuInflater().inflate(R.menu.addnote, menu);
         MenuItem menuItem = menu.findItem(R.id.add_note);
