@@ -22,9 +22,12 @@ public class NewNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Editable title;
-        TextInputLayout titleInput;
+        Editable title, subtitle, body;
+        TextInputLayout titleInput, subtitleInput, bodyInput;
         RadioGroup radioGroup;
+        DBHelper DB;
+
+        DB = new DBHelper(this);
 
 
         setContentView(R.layout.activity_new_note);
@@ -42,36 +45,7 @@ public class NewNote extends AppCompatActivity {
             }
         });
 
-        titleInput = findViewById(R.id.titleInput);
-        title = titleInput.getEditText().getText();
-        //find button
-        Button doneButton = (Button) findViewById(R.id.doneButton);
-        //set onclick
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                //check to make sure title is filled in
-                if (title.length() == 0){
-                    Toast.makeText(getApplicationContext(),"Error: Input Title",Toast.LENGTH_SHORT).show();
-                }
-
-                else {
-                    //done onclick
-                    //save note
-                    //go back
-                    Intent i = new Intent(NewNote.this, MainActivity.class);
-                    finish();//delete current session
-                    startActivity(i);
-                }
-            }
-        });
-
-
-        //
-        //
-        //check colour buttons
-        //
-        //
-
+        // COLOURED BUTTONS
         ConstraintLayout layout1 = findViewById(R.id.layout1);
         Button blueButton = (Button) findViewById(R.id.blueButton);
         blueButton.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +74,50 @@ public class NewNote extends AppCompatActivity {
                 layout1.setBackgroundResource(R.color.green);
             }
         });
-        
+
+        titleInput = findViewById(R.id.titleInput);
+        title = titleInput.getEditText().getText();
+
+        subtitleInput = findViewById(R.id.subtitleInput);
+        subtitle = subtitleInput.getEditText().getText();
+
+        bodyInput = findViewById(R.id.bodyInput);
+        body = bodyInput.getEditText().getText();
+
+        Button doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //check to make sure title is filled in
+                if (title.length() == 0 || colourInt == 0){
+                    Toast.makeText(getApplicationContext(),"Error: Input Incomplete",Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    //done onclick
+                    //save note
+                    //go back
+
+                    String titleTXT = title.toString();
+                    String subtitleTXT = subtitle.toString();
+                    String bodyTXT = body.toString();
+                    String colourTXT;
+
+                    if (colourInt == 1) { colourTXT = "Green"; }
+                    else if (colourInt == 2) { colourTXT = "Red"; }
+                    else { colourTXT = "Blue"; }
+
+                    Boolean checkinsertdata = DB.insertNote(titleTXT, subtitleTXT, bodyTXT, colourTXT);
+
+                    if(checkinsertdata == true)
+                        Toast.makeText(getApplicationContext(), "New Entry Inserted", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(NewNote.this, MainActivity.class);
+                    finish();//delete current session
+                    startActivity(i);
+                }
+            }
+        });
     }
 }
