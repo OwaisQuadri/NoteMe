@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,18 +37,25 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "No Entry Exists", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+                setContentView(linearLayout);
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext()) {
-                    buffer.append("Title: " + res.getString(0) + "\n");
-                    buffer.append("Subtitle: " + res.getString(1) + "\n");
-                    buffer.append("Body: " + res.getString(2) + "\n");
-                    buffer.append("Color: " + res.getString(3) + "\n\n");
+                    String text = "";
+                    text += ("Title: " + res.getString(0) + "\n");
+                    text += ("Subtitle: " + res.getString(1) + "\n");
+                    text += ("Body: " + res.getString(2) + "\n");
+
+                    String colour = res.getString(3);
+
+                    TextView textView = new TextView(getApplicationContext());
+                    textView.setText(text);
+                    textView.setTextColor(Color.parseColor(colour));
+                    textView.setGravity(Gravity.CENTER);
+                    linearLayout.addView(textView);
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setCancelable(true);
-                builder.setTitle("Notes");
-                builder.setMessage(buffer.toString());
-                builder.show();
             }
         });
     }
